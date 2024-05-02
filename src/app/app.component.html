@@ -1,34 +1,51 @@
-<h1>Password Generator</h1>
 
+<div class="container">
+  <div class="columns is-centered">
+    <div class="box column is-one-third">
+      <h1 class="title has-text-centered">Password Generator</h1>
 
-<div>
-  <label>Enter lenght</label>
-  <input (input)="onChangeLength($event)" type="number"/>
+      <div class="field">
+        <label>Length</label>
+        <input class="input" (input)="onChangeLength($event)" type="number"/>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseLetter()" type="checkbox" />
+            Use Letters
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseNumber()" type="checkbox" />
+            Use Numbers
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseSymbol()" type="checkbox" />
+            Use Symbols
+          </label>
+        </div>
+      </div>
+
+      <button [disabled]="
+          !(length && (useLetter || useNumber || useSymbol))
+        " (click)="onButtonClick()" class="button is-link is-fullwidth">
+        Generate!
+      </button>
+
+      <div class="box" *ngIf="password">
+        <label>Your Password</label>
+        <input class="input" [value]="password" />
+      </div>
+    </div>
+  </div>
 </div>
-
-<div>
-  <label>Use Letters</label>
-  <input (change)="onChangeUseLetter()" type="checkbox" />
-</div>
-
-<div>
-  <label>Use Symbols</label>
-  <input (change)="onChangeUseSymbol()" type="checkbox" />
-</div>
-
-<div>
-  <label>Use Numbers</label>
-  <input (change)="onChangeUseNumber()" type="checkbox" />
-</div>
-
-<div>
-  <button [disabled]="!(length && (useLetter || useNumber || useSymbol))" 
-    (click)="onButtonClick()">Generate !</button>
-</div>
-
-
-<div>
-  <label>Your Passsword: </label>
-  <input [value]="password" />
-</div>
-
